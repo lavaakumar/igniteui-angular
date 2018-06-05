@@ -28,6 +28,7 @@ import {
     IgxColumnResizerDirective,
     IgxColumnMovingDragDirective,
     IgxColumnMovingDropDirective,
+    IgxColumnMovingService,
     IgxGroupByRowTemplateDirective
 } from './grid.common';
 import { IgxGridComponent } from './grid.component';
@@ -106,13 +107,13 @@ import { IgxChipsModule } from '../chips/chips.module';
     IgxBadgeModule,
     IgxChipsModule
   ],
-  providers: [IgxGridAPIService, IgxSelectionAPIService]
+  providers: [IgxGridAPIService, IgxSelectionAPIService, IgxColumnMovingService]
 })
 export class IgxGridModule {
     public static forRoot() {
         return {
             ngModule: IgxGridModule,
-            providers: [IgxGridAPIService, IgxSelectionAPIService]
+            providers: [IgxGridAPIService, IgxSelectionAPIService, IgxColumnMovingService]
         };
     }
 }
