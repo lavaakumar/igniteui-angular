@@ -177,7 +177,7 @@ const appRoutes = [
         component: GridSampleComponent
     },
     {
-        path: "gridColumnMoving",
+        path: 'gridColumnMoving',
         component: GridColumnMovingSampleComponent
     },
     {
