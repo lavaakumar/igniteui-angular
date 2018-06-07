@@ -129,7 +129,7 @@ export class IgxDragDirective implements OnInit, OnDestroy {
             fromEvent(this.element.nativeElement, 'pointerdown').pipe(takeUntil(this._destroy))
                 .subscribe((res) => this.onPointerDown(res));
 
-            fromEvent(this.element.nativeElement, 'pointermove').pipe(
+            fromEvent(document, 'pointermove').pipe(
                 takeUntil(this._destroy),
                 throttle(() => interval(0, animationFrameScheduler))
             ).subscribe((res) => this.onPointerMove(res));

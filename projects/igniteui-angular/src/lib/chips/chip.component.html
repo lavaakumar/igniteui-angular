@@ -1,3 +1,6 @@
+<div igxDrop  (igxDragEnter)="onChipDragEnterHandler($event)" (igxDrop)="onChipDrop($event)" igxDrag [hideBaseOnDrag]="true"
+ [animateOnRelease]="true" [ghostImageClass]="'igx-chips-ghost'" (dragStart)="onChipDragStart($event)" (dragEnd)="onChipDragEnd($event)"
+  style='display:flex;width: fit-content;' >
 <span *ngIf="!isFirstChip" class="igx-chips-area__chip-connector" [style.visibility]="areaMovingPerforming ? 'hidden' : 'visible'">
     <ng-content select="igx-prefix-connector,[igxPrefixConnector]"></ng-content>
 </span>
@@ -17,3 +20,4 @@
 <span *ngIf="!isLastChip" [style.visibility]="areaMovingPerforming ? 'hidden' : 'visible' " class="igx-chips-area__chip-connector" >
     <ng-content select="igx-suffix-connector,[igxSuffixConnector]"></ng-content>
 </span>
+</div>

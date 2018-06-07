@@ -51,9 +51,6 @@ export class IgxChipComponent {
     @HostBinding('style.transitionDuration')
     public transitionTime = '0.5s';
 
-    @HostBinding('style.zIndex')
-    public zIndex = 1;
-
     @Input()
     public set color(newColor) {
         this.chipArea.nativeElement.style.backgroundColor = newColor;
@@ -64,10 +61,7 @@ export class IgxChipComponent {
     }
 
     @Output()
-    public onOutOfAreaLeft = new EventEmitter<any>();
-
-    @Output()
-    public onOutOfAreaRight = new EventEmitter<any>();
+    public onChipDragOver = new EventEmitter<any>();
 
     @Output()
     public onMoveStart = new EventEmitter<any>();
@@ -111,95 +105,36 @@ export class IgxChipComponent {
                 private elementRef: ElementRef) {
     }
 
-    @HostListener('pointerdown', ['$event'])
-    public onPointerDown(event) {
-        this.elementRef.nativeElement.setPointerCapture(event.pointerId);
-        this.bInteracting = true;
-        this.bInteracted = true;
-        this.oldMouseX = event.clientX;
-        this.oldMouseY = event.clientY;
-        this.initialOffsetX = event.offsetX;
-        this.initialOffsetY = event.offsetY;
-        this.transitionTime = '0s'; // transition time with 0s disables transition
-        this.zIndex = 10;
+    
+    public onChipDragStart(event) {
+        this.areaMovingPerforming = true;
         this.onInteractionStart.emit();
+        this.onMoveStart.emit();
     }
-
-    @HostListener('pointermove', ['$event'])
-    public onPointerMove(event) {
-        if (this.bInteracting) {
-            const emitObject = {
-                owner: this,
-                isValid: false
-            };
-            if (!this.bMoved) {
-                this.onMoveStart.emit();
-            }
-
-            const moveY = event.clientY - this.oldMouseY;
-            const moveX = event.clientX - this.oldMouseX;
-            if (moveX || moveY) {
-                this.bMoved = true;
-            }
-
-            this.top += moveY;
-            this.left += moveX;
-            this.oldMouseX = event.clientX;
-            this.oldMouseY = event.clientY;
-
-            const curWidth = this.elementRef.nativeElement.offsetWidth;
-            if (this.left >= curWidth / 2 && !this.outEventEmmited) {
-                this.onOutOfAreaRight.emit(emitObject);
-                this.outEventEmmited = true;
-                if (emitObject.isValid) {
-                    const nextElementWidth = this.elementRef.nativeElement.nextSibling.offsetWidth;
-                    this.left = -1 * (nextElementWidth - Math.abs(this.left));
-                }
-            } else if (this.left <= (-1 * curWidth / 2) && !this.outEventEmmited) {
-                this.onOutOfAreaLeft.emit(emitObject);
-                this.outEventEmmited = true;
-                if (emitObject.isValid) {
-                    const prevElementWidth = this.elementRef.nativeElement.previousSibling.offsetWidth;
-                    this.left = (prevElementWidth - Math.abs(this.left));
-                }
-            } else if (this.outEventEmmited && (-1 * curWidth / 2) < this.left && this.left <= curWidth / 2 ) {
-                this.outEventEmmited = false;
-            }
-        }
-    }
-
-    @HostListener('pointerup', ['$event'])
-    public onPointerUp(event) {
-        this.bInteracting = false;
-        this.transitionTime = this.defaultTransitionTime;
-        this.top = 0;
-        this.left = 0;
-
+    public onChipDragEnd(event) {
+        this.areaMovingPerforming = false;
         this.onInteractionEnd.emit({
             owner: this,
             moved: this.bMoved
         });
-        if (!this.bMoved) {
-            this.zIndex = 1;
-            this.onMoveEnd.emit();
-        }
-        this.bMoved = false;
+        this.onMoveEnd.emit();
     }
-
-    @HostListener('transitionend', ['$event'])
-    public onTransitionEnd(event) {
-        if (!this.bInteracting && this.bInteracted) {
-            // Fire once after the transition animation is complete when releasing the chip from dragging
-            this.zIndex = 1;
-            this.onMoveEnd.emit();
-            this.bInteracted = false;
-        }
-    }
-
+    
     public onChipRemove() {
         const eventData = {
             owner: this
         };
         this.onRemove.emit(eventData);
+    }
+    public onChipDragEnterHandler($event) {
+        console.log("chip drag");
+        const eventArgs = {
+            targetChip: this,
+            detail: $event.detail
+        }
+        this.onChipDragOver.emit(eventArgs)
+    }
+    public onChipDrop($event) {
+        console.log("chip drop")
     }
 }

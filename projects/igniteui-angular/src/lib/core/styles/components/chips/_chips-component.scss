@@ -38,5 +38,9 @@
     @include e(chip-connector) {
         @extend %igx-chips-area__chip-connector  !optional;
     }
+
+    @include e(chip-ghost) {
+        @extend %igx-chips-ghost  !optional;
+    }
 }
 

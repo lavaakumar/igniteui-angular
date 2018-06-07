@@ -65,13 +65,10 @@ export class IgxChipsAreaComponent implements AfterViewInit, DoCheck {
     }
 
     ngAfterViewInit() {
-        this.modifiedChipsArray = this.chipsList.toArray();
+        this.modifiedChipsArray = this.chipsList.toArray();     
         this.chipsList.forEach((chip) => {
-            chip.onOutOfAreaLeft.subscribe((chipRef) => {
-                this.onChipOutOfAreaLeft(chipRef);
-            });
-            chip.onOutOfAreaRight.subscribe((chipRef) => {
-                this.onChipOutOfAreaRight(chipRef);
+            chip.onChipDragOver.subscribe((chipRef) => {
+                this.onChipDragOver(chipRef);
             });
             chip.onMoveStart.subscribe(() => {
                 this.onChipMoveStart();
@@ -85,19 +82,15 @@ export class IgxChipsAreaComponent implements AfterViewInit, DoCheck {
             chip.onInteractionEnd.subscribe(() => {
                 this.onChipInteractionEnd();
             });
-        });
+        });  
     }
-
     public ngDoCheck(): void {
         if (this.chipsList) {
             const changes = this._differ.diff(this.chipsList.toArray());
             if (changes) {
                 changes.forEachAddedItem((addedChip) => {
-                    addedChip.item.onOutOfAreaLeft.subscribe((chipRef) => {
-                        this.onChipOutOfAreaLeft(chipRef);
-                    });
-                    addedChip.item.onOutOfAreaRight.subscribe((chipRef) => {
-                        this.onChipOutOfAreaRight(chipRef);
+                    addedChip.item.onChipDragOver.subscribe((chipRef) => {
+                        this.onChipDragOver(chipRef);
                     });
                     addedChip.item.onMoveStart.subscribe(() => {
                         this.onChipMoveStart();
@@ -114,6 +107,43 @@ export class IgxChipsAreaComponent implements AfterViewInit, DoCheck {
                 });
             }
         }
+    }
+
+    onChipDragOver($event) {
+        const dropChipRect = $event.targetChip.elementRef.nativeElement.getBoundingClientRect();
+        const chipIndex =this.chipsList.toArray().findIndex((el) => el === $event.targetChip);
+        const evtDetails = $event.detail;
+        if (evtDetails.startX < dropChipRect.x) {
+            // from the left 
+            this.shiftChipLeft(chipIndex);
+        } else {
+            // from the right
+            this.shiftChipRight(chipIndex);
+        }
+        const eventData = {
+            chipsArray: this.modifiedChipsArray
+        };
+        this.onChipsOrderChange.emit(eventData);
+    }
+    onChipMoveStart() {
+        console.log("move start.");
+    }
+
+    onChipMoveEnd() {
+        this.chipsList.forEach((chip) => {
+            chip.areaMovingPerforming = false;
+        });
+        this.onChipsMoveEnd.emit();
+    }
+
+    onChipInteractionStart() {
+        this.chipsList.forEach((chip) => {
+            chip.areaMovingPerforming = true;
+        });
+    }
+
+    onChipInteractionEnd() {        
+        this.onChipsInteractionEnd.emit();
     }
 
     shiftChipLeft(chipIndex: number) {
@@ -144,56 +174,5 @@ export class IgxChipsAreaComponent implements AfterViewInit, DoCheck {
             }
         }
         this.modifiedChipsArray = result;
-    }
-
-    onChipOutOfAreaLeft(chipData) {
-        const chipIndex = this.chipsList.toArray().indexOf(chipData.owner);
-        if (chipIndex === 0) {
-            return;
-        }
-
-        this.shiftChipLeft(chipIndex);
-        const eventData = {
-            chipsArray: this.modifiedChipsArray,
-            isValid: false
-        };
-        this.onChipsOrderChange.emit(eventData);
-        chipData.isValid = eventData.isValid;
-    }
-
-    onChipOutOfAreaRight(chipData) {
-        const chipIndex = this.chipsList.toArray().indexOf(chipData.owner);
-        if (chipIndex === this.chipsList.toArray().length - 1) {
-            return;
-        }
-
-        this.shiftChipRight(chipIndex);
-        const eventData = {
-            chipsArray: this.modifiedChipsArray,
-            isValid: false
-        };
-        this.onChipsOrderChange.emit(eventData);
-        chipData.isValid = eventData.isValid;
-    }
-
-    onChipMoveStart() {
-    }
-
-    onChipMoveEnd() {
-        this.chipsList.forEach((chip) => {
-            chip.areaMovingPerforming = false;
-        });
-
-        this.onChipsMoveEnd.emit();
-    }
-
-    onChipInteractionStart() {
-        this.chipsList.forEach((chip) => {
-            chip.areaMovingPerforming = true;
-        });
-    }
-
-    onChipInteractionEnd() {
-        this.onChipsInteractionEnd.emit();
     }
 }

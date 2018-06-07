@@ -32,7 +32,8 @@ import { IgxChipsAreaComponent } from './chips-area.component';
     IgxRippleModule,
     IgxIconModule,
     IgxButtonModule,
-    IgxAvatarModule
+    IgxAvatarModule,
+    IgxDragDropModule
   ]
 })
 export class IgxChipsModule {
