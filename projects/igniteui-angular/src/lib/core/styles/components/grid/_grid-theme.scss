@@ -365,10 +365,6 @@
         padding: map-get($grid-header-padding, 'comfortable');
         border-right: 1px dotted igx-color($palette, 'grays', 400);
         overflow: visible;
-
-        &:last-of-type {
-            border-right: transparent;
-        }
     }
 
     %grid-cell-header--cosy {
