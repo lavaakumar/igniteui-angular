@@ -2,8 +2,8 @@
 <ng-container *ngTemplateOutlet="template" ></ng-container>
 
 <ng-template #columnHidingUI>
-    <h4>{{ title }}</h4><br/>
-    <div>
+    <h4 style="margin-top:15px; margin-bottom:15px">{{ title }}</h4>
+    <div style="margin-bottom:15px">
         <input type="text" [(ngModel)]="filterCriteria" [placeholder]="filterColumnsPrompt" autocomplete="off" />
     </div>
     <div *ngFor="let columnItem of columnItems">
