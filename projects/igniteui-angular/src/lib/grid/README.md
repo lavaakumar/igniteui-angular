@@ -168,6 +168,11 @@ Below is the list of all inputs that the developers may set to configure the gri
 |`evenRowCSS`|string|Additional styling classes applied to all even rows in the grid.|
 |`oddRowCSS`|string|Additional styling classses applied to all odd rows in the grid.|
 |`paginationTemplate`|TemplateRef|You can provide a custom `ng-template` for the pagination part of the grid.|
+|`columnHiding`|boolean|Whether the built-in column hiding UI for the grid is enabled.|
+|`columnHidingTitle`|string|The title to be displayed of the built-in column hiding UI.|
+|`columnHidingUI`|IgxColumnHidingComponent|Reference to the built-in column hiding UI component.|
+|`hiddenColumnsCount`|number|The number of hidden columns.|
+|`hiddenColumnsText`|string|The text to be displayed inside the toggle button for the built-in column hiding UI.|
 
 
 ### Outputs
@@ -194,6 +199,7 @@ A list of the events emitted by the **igx-grid**:
 |`onColumnResized`|Emitted when a column is resized. Returns the column object, previous and new column width.|
 |`onContextMenu`|Emitted when a cell is right clicked. Returns the cell object.|
 |`onDoubleClick`|Emitted when a cell is double clicked. Returns the cell object.|
+|`onColumnVisibilityChanged`|Emitted when a column visibility has changed. Args: `{ column: any, newValue: boolean }`|
 
 
 Defining handlers for these event emitters is done using declarative event binding:
@@ -242,6 +248,7 @@ Here is a list of all public methods exposed by **igx-grid**:
 |`findPrev(text: string, caseSensitive?: boolean)`|Highlights all occurrences of the specified text and marks the previous occurrence as active.|
 |`clearSearch(text: string, caseSensitive?: boolean)`|Removes all search highlights from the grid.|
 |`refreshSearch()`|Refreshes the current search.|
+|`toggleColumnHidingUI()`|Shows/Hides the built-in column hiding UI.|
 
 
 
@@ -276,7 +283,7 @@ Inputs available on the **IgxGridColumnComponent** to define columns:
 |`dataType`|DataType|One of string, number, boolean or Date. When filtering is enabled the filter UI conditions are based on the `dataType` of the column. Defaults to `string` if it is not provided. With `autoGenerate` enabled the grid will try to resolve the correct data type for each column based on the data source.|
 |`pinned`|boolean|Set column to be pinned or not|
 |`searchable`|boolean|Determines whether the column is included in the search. If set to false, the cell values for this column will not be included in the results of the search API of the grid (defaults to true)|
-
+|`disableHiding`|boolean|Determines whether the column cannot be hidden through the column hiding UI.|
 
 ### Methods
 Here is a list of all public methods exposed by **IgxGridColumnComponent**:
