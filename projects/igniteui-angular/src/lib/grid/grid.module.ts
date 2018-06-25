@@ -50,6 +50,7 @@ import { IgxChipsModule } from '../chips/chips.module';
 import { IgxDragDropModule } from '../directives/dragdrop/dragdrop.directive';
 import { IgxGridFilterExpressionComponent } from './grid-filtering-expression.component';
 import { IgxButtonGroupModule } from '../buttonGroup/buttonGroup.component';
+import { ScrollingModule } from '@angular/cdk-experimental/scrolling';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { IgxButtonGroupModule } from '../buttonGroup/buttonGroup.component';
     IgxDragDropModule,
     IgxColumnHidingModule,
     IgxDropDownModule,
-    IgxButtonGroupModule
+    IgxButtonGroupModule,
+    ScrollingModule
   ],
   providers: [IgxGridAPIService, IgxSelectionAPIService, IgxColumnMovingService]
 })

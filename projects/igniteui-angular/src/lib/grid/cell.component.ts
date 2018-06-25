@@ -154,7 +154,7 @@ export class IgxGridCellComponent implements OnInit, OnDestroy, AfterViewInit {
     @HostBinding('style.flex-basis')
     @HostBinding('class.igx-grid__td--fw')
     get width() {
-        const hasVerticalScroll = !this.grid.verticalScrollContainer.dc.instance.notVirtual;
+        const hasVerticalScroll = true;//!this.grid.verticalScrollContainer.dc.instance.notVirtual;
         const colWidth = this.column.width;
         const isPercentageWidth = colWidth && typeof colWidth === 'string' && colWidth.indexOf('%') !== -1;
 
@@ -287,7 +287,7 @@ export class IgxGridCellComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public ngOnInit() {
         this.cellSelectionID = this.gridID + '-cells';
-        this.chunkLoadedHor = this.row.virtDirRow.onChunkLoad.subscribe(
+        /*this.chunkLoadedHor = this.row.virtDirRow.onChunkLoad.subscribe(
             () => {
                 if (!this.selected) {
                     this.nativeElement.blur();
@@ -300,7 +300,7 @@ export class IgxGridCellComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.nativeElement.blur();
                 }
                 this.cdr.markForCheck();
-            });
+            });*/
     }
 
     public update(val: any) {

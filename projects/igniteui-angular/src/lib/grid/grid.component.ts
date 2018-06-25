@@ -25,6 +25,9 @@ import {
     ViewChildren,
     ViewContainerRef
 } from '@angular/core';
+import {
+    CdkVirtualForOf, CdkVirtualForOfContext, CdkVirtualScrollViewport
+} from '@angular/cdk-experimental';
 import { of, Subject } from 'rxjs';
 import { debounceTime, delay, merge, repeat, take, takeUntil } from 'rxjs/operators';
 import { IgxSelectionAPIService } from '../core/selection';
@@ -1675,7 +1678,7 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
             then merge with an empty observable after DEBOUNCE_TIME,
             re-subscribe and repeat the process
         */
-        this.verticalScrollContainer.onChunkLoad.pipe(
+      /*  this.verticalScrollContainer.onChunkLoad.pipe(
             takeUntil(this.destroy$),
             take(1),
             merge(of({})),
@@ -1683,7 +1686,7 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
             repeat()
         ).subscribe(() => {
             this.eventBus.next();
-        });
+        });*/
     }
 
     public onHeaderCheckboxClick(event) {
