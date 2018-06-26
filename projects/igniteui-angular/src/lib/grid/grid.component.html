@@ -70,7 +70,7 @@
 </div>
 
 
-<cdk-virtual-scroll-viewport class="igx-grid__tbody" autosize role="rowgroup" [style.height.px]='calcHeight' [style.width.px]='calcWidth' #tbody>
+<cdk-virtual-scroll-viewport [style.overflow]="'auto'" class="igx-grid__tbody" autosize role="rowgroup" [style.height.px]='calcHeight' [style.width.px]='calcWidth' #tbody>
     <span *ngIf="hasMovableColumns && draggedColumn && pinnedColumns.length <= 0" [igxColumnMovingDrop]="parentVirtDir" [attr.droppable]="true" id="left" class="igx-grid__scroll-on-drag-left"></span>
     <span *ngIf="hasMovableColumns && draggedColumn && pinnedColumns.length > 0" [igxColumnMovingDrop]="parentVirtDir" [attr.droppable]="true" id="left" class="igx-grid__scroll-on-drag-pinned" [style.left.px]="pinnedWidth"></span>
     <ng-template cdkVirtualFor let-rowData [cdkVirtualForOf]="data | gridFiltering:filteringExpressionsTree:id:pipeTrigger

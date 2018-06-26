@@ -3,7 +3,6 @@ import { IgxGridComponent } from 'igniteui-angular';
 
 @Component({
     selector: 'app-grid-performance-sample',
-    styleUrls: ['grid-performance.sample.css'],
     templateUrl: 'grid-performance.sample.html'
 })
 
@@ -21,13 +20,7 @@ export class GridPerformanceSampleComponent implements OnInit {
         for (let j = 0; j < 10; j++) {
             cols.push({
                 field: j.toString(),
-                width: j % 3 === 0 ?
-                    Math.floor((Math.random() * 50) + 50) :
-                    (
-                        j % 3 === 1 ?
-                            Math.floor((Math.random() * 60) + 50) :
-                            Math.floor((Math.random() * 70) + 50)
-                    )
+                width: 120
             });
         }
 
