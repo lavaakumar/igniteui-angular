@@ -2,6 +2,7 @@ import {
     AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef,
     Component, DoCheck, HostBinding, Input, OnInit
 } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { DisplayDensity } from '../core/utils';
 import { DataType } from '../data-operations/data-util';
 import { IgxGridAPIService } from './api.service';
@@ -12,7 +13,7 @@ import { IgxColumnComponent } from './column.component';
     selector: 'igx-grid-summary',
     templateUrl: './grid-summary.component.html'
 })
-export class IgxGridSummaryComponent implements OnInit, DoCheck, AfterContentInit {
+export class IgxGridSummaryComponent extends DecimalPipe implements OnInit, DoCheck, AfterContentInit {
 
     fieldName: string;
 
@@ -77,7 +78,9 @@ export class IgxGridSummaryComponent implements OnInit, DoCheck, AfterContentIni
     private numberSummaryResultClass = 'igx-grid-summary-item__result';
     private displayDensity: DisplayDensity | string;
 
-    constructor(public gridAPI: IgxGridAPIService, public cdr: ChangeDetectorRef) { }
+    constructor(public gridAPI: IgxGridAPIService, public cdr: ChangeDetectorRef) {
+        super('en-US');
+    }
 
     public ngOnInit() {
     }
@@ -105,6 +108,15 @@ export class IgxGridSummaryComponent implements OnInit, DoCheck, AfterContentIni
             this.gridAPI.set_summary_by_column_name(this.gridID, this.column.field);
             return this.gridAPI.get_summaries(this.gridID).get(this.column.field);
         }
+    }
+
+    public isNumber(res) {
+        return typeof res === 'number';
+    }
+
+    transform(value: number) {
+        const val = super.transform(value, '1.0-2');
+        return val;
     }
 
     protected get hostClassPrefix() {
