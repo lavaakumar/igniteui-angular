@@ -708,9 +708,6 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
         if (this._toolbarTitle !== newValue) {
             this._toolbarTitle = newValue;
             this.cdr.markForCheck();
-            if (this._ngAfterViewInitPaassed) {
-                this.calculateGridSizes();
-            }
         }
     }
 
@@ -723,9 +720,6 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
         if (this._exportExcel !== newValue) {
             this._exportExcel = newValue;
             this.cdr.markForCheck();
-            if (this._ngAfterViewInitPaassed) {
-                this.calculateGridSizes();
-            }
         }
     }
 
@@ -738,9 +732,6 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
         if (this._exportCsv !== newValue) {
             this._exportCsv = newValue;
             this.cdr.markForCheck();
-            if (this._ngAfterViewInitPaassed) {
-                this.calculateGridSizes();
-            }
         }
     }
 
@@ -753,9 +744,6 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
         if (this._exportText !== newValue) {
             this._exportText = newValue;
             this.cdr.markForCheck();
-            if (this._ngAfterViewInitPaassed) {
-                this.calculateGridSizes();
-            }
         }
     }
 
@@ -768,9 +756,6 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
         if (this._exportExcelText !== newValue) {
             this._exportExcelText = newValue;
             this.cdr.markForCheck();
-            if (this._ngAfterViewInitPaassed) {
-                this.calculateGridSizes();
-            }
         }
     }
 
@@ -783,9 +768,6 @@ export class IgxGridComponent implements OnInit, OnDestroy, AfterContentInit, Af
         if (this._exportCsvText !== newValue) {
             this._exportCsvText = newValue;
             this.cdr.markForCheck();
-            if (this._ngAfterViewInitPaassed) {
-                this.calculateGridSizes();
-            }
         }
     }
 
