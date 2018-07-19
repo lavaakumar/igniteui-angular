@@ -594,7 +594,7 @@ describe('IgxGrid - multi-column headers', () => {
                 'personDetailsColumn', 2);
             done();
         });
-    });
+    }));
 
     it('column pinning - Pin a column in a group using property.', () => {
         PinningTests.testColumnGroupPinning((component) => {
@@ -1283,7 +1283,7 @@ describe('IgxGrid - multi-column headers', () => {
         NestedColGroupsTests.testHeadersRendering(fixture);
     });
 
-    it('Should render headers correctly when having nested column groups with huge header text.', fakeAsync(() => {
+    it('Should render headers correctly when having nested column groups with huge header text.', ((done) => {
         const fixture = TestBed.createComponent(NestedColumnGroupsGridComponent);
         fixture.detectChanges();
         const ci = fixture.componentInstance;
@@ -1301,9 +1301,9 @@ describe('IgxGrid - multi-column headers', () => {
             ci.faxColTitle = ci.cityColTitle = title;
 
         fixture.detectChanges();
-        tick(50);
-        NestedColGroupsTests.testHeadersRendering(fixture);
-        discardPeriodicTasks();
+        setTimeout(() => {
+            NestedColGroupsTests.testHeadersRendering(fixture);
+        });
     }));
 
     it('Should emit "columnInit" event when having multi-column headers.', () => {
