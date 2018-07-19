@@ -1299,8 +1299,8 @@ describe('IgxGrid - multi-column headers', () => {
             ci.secondSlaveColGroupTitle = ci.addressColTitle = ci.phoneColTitle =
             ci.faxColTitle = ci.cityColTitle = title;
 
-        fixture.detectChanges();
         flush(100);
+        fixture.detectChanges();
         NestedColGroupsTests.testHeadersRendering(fixture);
         discardPeriodicTasks();
     }));
