@@ -532,6 +532,8 @@ describe('IgxGrid - multi-column headers', () => {
     });
 
     it('Should render column group headers correctly.', fakeAsync(() => {
+        discardPeriodicTasks();
+
         const fixture = TestBed.createComponent(BlueWhaleGridComponent);
         fixture.detectChanges();
         const componentInstance = fixture.componentInstance;
@@ -591,8 +593,6 @@ describe('IgxGrid - multi-column headers', () => {
         testColumnGroupHeaderRendering(personDetailsColumn, 2 * columnWidthPx,
             2 * grid.defaultRowHeight, componentInstance.personDetailsTitle,
             'personDetailsColumn', 2);
-        flushMicrotasks();
-        discardPeriodicTasks();
     }));
 
     it('column pinning - Pin a column in a group using property.', () => {
