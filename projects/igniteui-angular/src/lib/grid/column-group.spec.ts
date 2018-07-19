@@ -1303,6 +1303,7 @@ describe('IgxGrid - multi-column headers', () => {
         fixture.detectChanges();
         setTimeout(() => {
             NestedColGroupsTests.testHeadersRendering(fixture);
+            done();
         });
     }));
 
