@@ -611,7 +611,7 @@ describe('IgxGrid - GroupBy', () => {
         expect(gRow.expanded).toBe(true);
     });
 
-    xit('should allow keyboard navigation through group rows.', (done) => {
+    it('should allow keyboard navigation through group rows.', (done) => {
         const fix = TestBed.createComponent(DefaultGridComponent);
         const grid = fix.componentInstance.instance;
         const mockEvent = { preventDefault: () => { } };
