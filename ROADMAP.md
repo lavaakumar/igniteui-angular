@@ -20,8 +20,8 @@
 6. **[DONE]**Advanced Filtering
 7. **[DONE]**Column Moving
 8. **[DONE]** Update to Angular 6
-9. Design: Release Updated Design System (Sketch UI kits, UI patterns, screens, documentation)
-10. Design: Data dense theme for data grid 
+9. **[DONE]**Design: Release Updated Design System (Sketch UI kits, UI patterns, screens, documentation)
+10. **[DONE]**Design: Data dense theme for data grid 
 
 
 # Previous Milestones
